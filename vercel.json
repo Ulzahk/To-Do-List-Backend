@@ -1,0 +1,12 @@
+{
+    "name": "todolist",
+    "version": 2,
+    "builds": [{ "src": "index.js", "use": "@now/node-server" }],
+    "routes": [{ "src": "/(.*)", "dest": "/index.js" }],
+    "env": {
+        "DB_USER": "@todolist-db-user",
+        "DB_PASSWORD": "@todolist-db-password",
+        "DB_HOST": "@todolist-db-host",
+        "DB_NAME": "@todolist-db-name"
+    }
+}
