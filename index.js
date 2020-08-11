@@ -1,16 +1,16 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-const { config } = require('./config/index')
-const listsRouter = require('./routes/views/lists')
-const toDoListApi = require('./routes/api/lists')
-const { logErrors, wrapErrors, errorHandler} = require('./utils/middleware/errorHandlers')
+const { config } = require('./src/config/index')
+const listsRouter = require('./src/routes/views/lists')
+const toDoListApi = require('./src/routes/api/lists')
+const { logErrors, wrapErrors, errorHandler} = require('./src/utils/middleware/errorHandlers')
 
 // Body parser
 app.use(express.json());
 
 // View engine setup
-app.set('views', path.join(__dirname,"views"));
+app.set('views', path.join(__dirname,"src/views"));
 app.set('view engine', 'pug');
 
 // Routes´
