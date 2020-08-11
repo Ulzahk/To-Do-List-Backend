@@ -1,0 +1,26 @@
+extends layout.pug
+
+block hero
+    section.hero.is-dark.is-bold
+        .hero-body
+            .container
+                h1.title To Do List App
+                h2.subtitle Organiza tus tareas
+
+block content
+    .container(style="display: flex; padding: 5px 0; text-align: center")
+        .columns.is-multiline
+            each list in lists
+                .column.is-one-quarter
+                    .card
+                        .card-content
+                            h1.title= list.title
+                            p.description= list.description
+                            p.space= ' '
+                                each task in list.tasks
+                                    .button.is-warning
+                                        p.order= task.order
+                                    p.name= task.taskName
+                                    p.descriptionTask= task.description
+                                    p.state= task.completed
+                                    hr

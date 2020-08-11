@@ -1,9 +1,11 @@
 const express = require('express');
-const ListsServices = require('../services/lists');
+const ListsServices = require('../../services/lists');
+const { listIdSchema, createListSchema, updateListSchema } = require('../../utils/schemas/lists');
+const validationHandlers = require('../../utils/middleware/validationHandlers');
 
 function toDoListApi(app){
     const router = express.Router();
-    app.use('/api/to-do', router);
+    app.use('/api/lists', router);
 
     const listsServices = new ListsServices();
 
@@ -22,7 +24,7 @@ function toDoListApi(app){
     })
 
     //Read List
-    router.get('/:listId', async function(req, res, next){
+    router.get('/:listId', validationHandlers({ listId: listIdSchema }, 'params'), async function(req, res, next){
         const { listId } = req.params
         try {
             const list = await listsServices.getList({ listId });
@@ -36,7 +38,7 @@ function toDoListApi(app){
     })
 
     //Create List
-    router.post('/', async function(req, res, next){
+    router.post('/', validationHandlers(createListSchema), async function(req, res, next){
         const { body: list } = req;
         try {
             const createdListId = await listsServices.createList({ list });
@@ -51,7 +53,7 @@ function toDoListApi(app){
     })
 
     //Update List
-    router.put('/:listId', async function(req, res, next){
+    router.put('/:listId', validationHandlers({ listId: listIdSchema }, 'params'), validationHandlers(createListSchema), async function(req, res, next){
         const { listId } = req.params;
         const { body: list } = req;
         try {
@@ -67,7 +69,7 @@ function toDoListApi(app){
     })
 
     //Delete List
-    router.delete('/:listId', async function(req, res, next){
+    router.delete('/:listId', validationHandlers({ listId: listIdSchema }, 'params'), async function(req, res, next){
         const { listId } = req.params;
         try {
             const deletedListId = await listsServices.deleteList({ listId });
