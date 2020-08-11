@@ -1,0 +1,25 @@
+{
+  "name": "reto-to-do-list",
+  "version": "1.0.0",
+  "description": "To Do List Backend App",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "set NODE_ENV=production & node src/index.js",
+    "dev": "set DEBUG=app:* & set NODE_ENV=development & nodemon src/index.js"
+  },
+  "keywords": [
+    "node.js",
+    "mongodb",
+    "express"
+  ],
+  "author": "Francisco Suarez <Ulzahk@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongodb": "^3.6.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
