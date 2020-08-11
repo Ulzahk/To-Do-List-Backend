@@ -19,8 +19,16 @@ block content
                             p.space= ' '
                                 each task in list.tasks
                                     .button.is-warning
-                                        p.order= task.order
+                                        p.order(style="font-size: 1rem; font-weight: bold;")= task.order
                                     p.name= task.taskName
                                     p.descriptionTask= task.description
-                                    p.state= task.completed
+                                    p.space= ' '
+                                    .button.is-dark
+                                        #task.completed
+                                            if task.completed === true
+                                                icon(style="font-size: 1.5rem;")
+                                                    i.fa.fa-check-circle
+                                            else 
+                                                icon(style="font-size: 1.5rem;")
+                                                    i.fa.fa-times-circle
                                     hr

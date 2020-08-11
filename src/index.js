@@ -18,9 +18,9 @@ app.use('/lists', listsRouter)
 toDoListApi(app);
 
 // Redirect(
-/* app.get('/', function(req, res){
-    res.redirect('/api/lists')
-}) */
+app.get('/', function(req, res){
+    res.redirect('/lists')
+})
 
 // Errors middleware
 app.use(logErrors);

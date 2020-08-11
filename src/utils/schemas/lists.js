@@ -8,7 +8,7 @@ const listTaskSchema= joi.array().items(joi.object({
     taskName: joi.string().max(100).required(),
     description: joi.string().max(300),
     completed: joi.boolean().required()
-})).required();
+}));
 const listTagsSchema= joi.array().items(joi.string().max(50));
 
 const createListSchema = {

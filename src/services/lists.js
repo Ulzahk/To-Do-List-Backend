@@ -22,9 +22,28 @@ class listsServices {
         return createdListId || [];
     }
 
+    //Update List
     async updateList({listId, list}){
         const updatedListId = await this.mongoDB.update(this.collection, listId, list);
         return updatedListId || [];
+    }
+
+    //Update Task 
+    async updateTask({listId, taskOrder, completedState}){
+        const updatedCompletedState = await this.mongoDB.updateTask(this.collection, listId, taskOrder, completedState);
+        return updatedCompletedState || [];
+    }
+
+    //Update to Add Task
+    async updateAddTask({listId, task}){
+        const updatedListTasks = await this.mongoDB.updateAddTask(this.collection, listId, task);
+        return updatedListTasks || [];
+    }
+
+    //Update to Remove Task
+    async updateRemoveTask({listId, taskOrder}){
+        const updatedTaskRemoved = await this.mongoDB.updateRemoveTask(this.collection, listId, taskOrder);
+        return updatedTaskRemoved || [];
     }
 
     async deleteList({listId}){

@@ -53,7 +53,7 @@ function toDoListApi(app){
     })
 
     //Update List
-    router.put('/:listId', validationHandlers({ listId: listIdSchema }, 'params'), validationHandlers(createListSchema), async function(req, res, next){
+    router.put('/:listId', validationHandlers({ listId: listIdSchema }, 'params'), validationHandlers(updateListSchema), async function(req, res, next){
         const { listId } = req.params;
         const { body: list } = req;
         try {
@@ -62,6 +62,55 @@ function toDoListApi(app){
             res.status(200).json({
                 data: updatedListId,
                 message: 'list updated'
+            })
+        } catch (error) {
+            next(error);
+        }
+    })
+
+    //Update Task
+    router.put('/:listId/:taskOrder', async function(req, res, next){
+        const { listId } = req.params;
+        const { taskOrder } = req.params
+        const { completed: completedState } = req.body;
+        try {
+            const updatedCompletedState = await listsServices.updateTask({ listId, taskOrder, completedState });
+
+            res.status(200).json({
+                data: updatedCompletedState,
+                message: 'task updated'
+            })
+        } catch (error) {
+            next(error);
+        }
+    })
+
+    //Update To Add Task
+    router.patch('/:listId', async function(req, res, next){
+        const { listId } = req.params;
+        const { body: task } = req;
+        try {
+            const updatedListTasks = await listsServices.updateAddTask({ listId, task });
+
+            res.status(200).json({
+                data: updatedListTasks,
+                message: 'tasks updated'
+            })
+        } catch (error) {
+            next(error);
+        }
+    })
+
+    //Update to Remove Task
+    router.patch('/:listId/:taskOrder', async function(req, res, next){
+        const { listId } = req.params;
+        const { taskOrder } = req.params
+        try {
+            const updatedTaskRemoved = await listsServices.updateRemoveTask({ listId, taskOrder });
+
+            res.status(200).json({
+                data: updatedTaskRemoved,
+                message: 'tasks removed'
             })
         } catch (error) {
             next(error);

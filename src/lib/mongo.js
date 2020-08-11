@@ -47,11 +47,34 @@ class MongoLib {
         }).then(result => result.insertedId)
     }
 
+    // Update List
     update(collection, id, data){
         return this.connect().then(db =>{
             return db.collection(collection).updateOne({_id: ObjectId(id)}, {$set: data}, {upsert: true});
         }).then(result => result.upsertId || id)
     }
+
+    // Update Task to Completed
+    updateTask(collection, id, order, completedState){
+        return this.connect().then(db =>{
+            return db.collection(collection).updateOne({_id: ObjectId(id), "tasks.order": parseInt(order)}, { $set: {"tasks.$.completed": completedState}});
+        }).then(result => result.upsertId || id)
+    }
+
+    // Update to Add task
+    updateAddTask(collection, id, data){
+        return this.connect().then(db =>{
+            return db.collection(collection).updateOne({_id: ObjectId(id)}, {$push: { "tasks": data }})
+        }).then(result => result.upsertId || id)
+    }
+
+    // Update to Remove Task
+    updateRemoveTask(collection, id, order){
+        return this.connect().then(db =>{
+            return db.collection(collection).updateOne({_id: ObjectId(id)}, { $pull: {"tasks": { "order": parseInt(order)}}});
+        }).then(result => result.upsertId || id)
+    }
+
 
     delete(collection, id){
         return this.connect().then(db =>{
