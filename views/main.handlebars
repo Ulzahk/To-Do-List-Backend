@@ -1,0 +1,11 @@
+
+
+{{> lovedChamps}}
+{{> hatedChamps}}
+{{#if listExists}} 
+  <ul>
+    {{#each suggestedChamps}}
+      <li class={{this.username}}>{{this.email}}</li>
+    {{/each}}
+  </ul>
+{{/if}}

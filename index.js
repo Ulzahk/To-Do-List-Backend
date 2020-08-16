@@ -3,8 +3,12 @@ const path = require('path')
 const { config } = require('./src/config/index')
 // This const mongoose is use for the connection to MongoDB
 const { mongoose } = require('./src/lib/mongodb')
-const listsRouter = require('./src/routes/views/lists')
+/* Old Configuration
 const toDoListApi = require('./src/routes/api/lists')
+const listsRouter = require('./src/routes/views/lists')
+ */
+const handlebars = require('express-handlebars')
+const viewsRouter = require('./src/routes/views/views')
 const { logErrors, wrapErrors, errorHandler } = require('./src/utils/middleware/errorHandlers')
 
 const app = express()
@@ -13,19 +17,33 @@ const app = express()
 app.use(express.json({ extended: true }))
 app.use(express.urlencoded({ extended: true }))
 
+
 // View engine setup
-app.set('views', path.join(__dirname, 'src/views'))
-app.set('view engine', 'pug')
+/* app.set('views', path.join(__dirname, 'src/views')) */
+app.set('view engine', 'handlebars')
+app.engine('handlebars', handlebars({
+  layoutsDir: __dirname + '/views/layouts/',
+  partialsDir: __dirname + '/views/partials/',
+  extname: 'hbs',
+  defaultLayout: 'planB'
+}))
 
 // Routes
-app.use('/lists', listsRouter)
-toDoListApi(app)
+  /*  Old Configuration
+  toDoListApi(app)
+  app.use('/lists', listsRouter)
+  */
+app.use('/views', viewsRouter)
 app.use('/', require('./src/components/users/routes'))
 app.use('/', require('./src/components/tasks/routes'))
+app.use('/', require('./src/components/lists/routes'))
+
+// Connection static files
+app.use(express.static('public'))
 
 // Redirect(
 app.get('/', function (req, res) {
-  res.redirect('/lists')
+  res.redirect('/views')
 })
 
 // Errors middleware

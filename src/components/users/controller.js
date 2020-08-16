@@ -1,7 +1,8 @@
 const Users = require('./model')
+const Lists = require('../lists/model')
 const usersController = {}
 
-usersController.getUsers = async (req, res, next) => {
+usersController.getUsers = async (req, res) => {
   try {
     const users = await Users.find()
     res.json({
@@ -10,7 +11,7 @@ usersController.getUsers = async (req, res, next) => {
       body: users
     })
   } catch (error) {
-    next(error)
+    console.log(error)
   }
 }
 
@@ -70,6 +71,52 @@ usersController.deleteUser = async (req, res, next) => {
     res.json({
       state: 200,
       message: `User ${req.params.id} deleted`
+    })
+  } catch (error) {
+    next(error)
+  }
+}
+
+usersController.addList = async (req, res, next) => {
+  try {
+    // Find List
+    const list = await Lists.findById(req.body.id_list)
+    // Add list to User
+    await Users.findByIdAndUpdate(
+      req.params.id, 
+      { $push: { lists: list} }, 
+      { omitUndefined: true, new: true })
+    // Get data from User
+    const user = await Users.findById(req.params.id)
+    res.json({
+      state: 200,
+      message: 'User updated with a new list',
+      body: user
+    })
+  } catch (error) {
+    next
+  }
+}
+
+usersController.removeList = async (req, res, next) => {
+  try {
+    //Search List
+    const list = await Lists.findById(req.body.id_list)
+    //Remove List from User
+    await Users.findByIdAndUpdate(
+      req.params.id,
+      { $pull: { lists: list } }, 
+      {omitUndefined: true, new: true})
+      console.log(req.body.id_list)
+    //Delete List
+    await Lists.findByIdAndDelete(req.body.id_list)
+    //Get data from User
+    const user = await Users.findById(req.params.id)
+
+    res.json({
+      state: 200,
+      message: 'A list was remove from User',
+      body: user
     })
   } catch (error) {
     next(error)
