@@ -21,6 +21,7 @@ app.set('view engine', 'pug')
 app.use('/lists', listsRouter)
 toDoListApi(app)
 app.use('/', require('./src/components/users/routes'))
+app.use('/', require('./src/components/tasks/routes'))
 
 // Redirect(
 app.get('/', function (req, res) {

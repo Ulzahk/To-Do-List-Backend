@@ -1,7 +1,7 @@
 const boom = require('@hapi/boom')
 const { config } = require('../../config/index')
 
-function withErrorStack (erro, stack) {
+function withErrorStack (error, stack) {
   if (config.dev) {
     return { ...error, stack } 
   }
