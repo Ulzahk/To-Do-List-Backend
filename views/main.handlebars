@@ -1,11 +1,8 @@
 
-
 {{> lovedChamps}}
 {{> hatedChamps}}
 {{#if listExists}} 
   <ul>
-    {{#each suggestedChamps}}
-      <li class={{this.username}}>{{this.email}}</li>
-    {{/each}}
+      <li class={{suggestedChamps.username}}>{{suggestedChamps.createdAt}}</li>
   </ul>
 {{/if}}
