@@ -102,14 +102,13 @@ usersController.loginUser = async (req, res, next) => {
       })
     } else {
       const equals = await bcrypt.compare(req.body.password, user.password)
-      console.log(equals)
       if (!equals) {
         res.json({
           error: 'Error, email or password not found'
         })
       } else {
         createToken(user)
-        res.redirect('/view2')
+        res.redirect('/home')
         /* res.json({
           state: 200,
           done: 'Login correct',

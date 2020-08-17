@@ -10,7 +10,7 @@ const listsRouter = require('./src/routes/views/lists')
 const handlebars = require('express-handlebars')
 const loginRouter = require('./src/routes/views/login')
 const registerRouter = require('./src/routes/views/register')
-const view2Router = require('./src/routes/views/view2')
+const homeRouter = require('./src/routes/views/home')
 const { logErrors, wrapErrors, errorHandler } = require('./src/utils/middleware/errorHandlers')
 
 const app = express()
@@ -36,7 +36,7 @@ app.engine('handlebars', handlebars({
   */
 app.use('/login', loginRouter)
 app.use('/register', registerRouter)
-app.use('/view2', view2Router)
+app.use('/home', homeRouter)
 app.use('/', require('./src/components/users/routes'))
 app.use('/', require('./src/components/tasks/routes'))
 app.use('/', require('./src/components/lists/routes'))

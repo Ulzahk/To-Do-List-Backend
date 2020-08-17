@@ -3,7 +3,7 @@ const router = express.Router()
 
 router.get('/', async (req, res, next) => {
     try {
-      res.render('view2', { layout: 'index' })
+      res.render('home', { layout: 'index' })
     } catch (error) {
       next(error)
     }
