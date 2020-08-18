@@ -1,0 +1,74 @@
+
+<section class="home-section">
+    <header class="header-section">
+        <nav>
+            <div class="logo-division">
+                <a class="logo-text" href="/login">To Do List App</a>
+            </div>
+            <div class="navbar-division">
+                {{#each user}}
+                <li>
+                    <p>Welcome Back {{this.username}}</p>
+                </li>
+                {{/each}}
+                <li>
+                    <a href="/createList"> <i class="fas fa-plus-square"></i> Create List </a>
+                </li>
+            </div>
+        </nav>
+    </header>
+    <div class="title-section">
+        <h2>Lists</h2>
+    </div>
+    <main class="main-section">
+        {{#each list}}
+        <div class="card">
+            <div class="card-header">
+                <p class="card-header-title">{{this.list_title}}</p>
+                <p class="card-header-description">{{this.description}}</p>
+            </div>
+            <div class="card-body">
+                <ul class="ul-card-body">
+                    {{#each this.tasks}}
+                    <li>
+                        <div class="text-task">
+                            {{#if this.completed}}
+                            <form action="/taskUncompleted" method="POST">
+                                <input type="hidden" name="id_list" id="id_list" value="{{../this._id}}">
+                                <input type="hidden" name="id_task" id="id_task" value="{{this._id}}">
+                                <button class="completed-task-button" type="submit"><i class="fas fa-check-square"></i></button>
+                            </form>
+                            {{else}}
+                            <form action="/taskCompleted" method="POST">
+                                <input type="hidden" name="id_list" id="id_list" value="{{../this._id}}">
+                                <input type="hidden" name="id_task" id="id_task" value="{{this._id}}">
+                                <button class="uncompleted-task-button" type="submit"><i class="far fa-square"></i></button>
+                            </form>
+                            {{/if}}
+                            {{this.task_name}}
+                        </div>
+                        <form action="/removeTask" method="POST">
+                            <input type="hidden" name="id_list" id="id_list" value="{{../this._id}}">
+                            <input type="hidden" name="id_task" id="id_task" value="{{this._id}}">
+                            <button class="delete-task-button" type="submit"><i class="fas fa-trash-alt"></i></button>
+                        </form>
+                    </li>
+                    {{/each}}
+                </ul>
+            </div>
+            <div class="card-footer">
+                <form action="/addTask" method="GET">
+                    <input type="hidden" name="id_list" id="id_list" value="{{this._id}}">
+                    <button class="add-task-button" type="submit"><i class="fas fa-tasks"></i> Add Task </button>
+                </form>
+                <form action="/deleteList" method="POST">
+                    <input type="hidden" name="_id" id="_id" value="{{this._id}}">
+                    <button class="delete-list-button" type="submit"><i class="fas fa-trash-alt"></i> Delete List </button>
+                </form>
+            </div>
+        </div>
+        {{/each}}
+    </main>
+    <footer class="footer">
+    </footer>
+</section>

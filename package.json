@@ -5,22 +5,29 @@
   "main": "src/index.js",
   "scripts": {
     "start": "set NODE_ENV=production & node src/index.js",
-    "dev": "set DEBUG=app:* & set NODE_ENV=development & nodemon src/index.js"
+    "dev": "set DEBUG=app:* & set NODE_ENV=development & nodemon src/index.js",
+    "lint": "standard --fix"
   },
   "keywords": [
     "node.js",
     "mongodb",
     "express"
   ],
-  "author": "Francisco Suarez <Ulzahk@gmail.com>",
+  "author": "Francisco Suarez <ulzahk@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "@hapi/boom": "^9.1.0",
     "@hapi/joi": "^17.1.1",
+    "bcrypt": "^5.0.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-handlebars": "^5.1.0",
+    "jwt-simple": "^0.5.6",
+    "moment": "^2.27.0",
     "mongodb": "^3.6.0",
+    "mongoose": "^5.10.0",
     "pug": "^3.0.0",
+    "standard": "^14.3.4",
     "vercel": "^19.2.0"
   },
   "devDependencies": {
