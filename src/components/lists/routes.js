@@ -12,6 +12,8 @@ router.delete('/api/lists/:id', lists.deleteList)
 router.post('/deleteList', lists.deleteListButton)
 router.post('/authAddTask', lists.addTask)
 router.post('/removeTask',lists.removeTask)
+router.post('/taskCompleted', lists.markTask)
+router.post('/taskUncompleted', lists.unmarkTask)
 
 
 module.exports = router

@@ -31,11 +31,27 @@
                 <ul class="ul-card-body">
                     {{#each this.tasks}}
                     <li>
-                        <p class="text-task">
-                            <a class="completed-task-button" href=""><i class="far fa-square"></i></a>
-                                {{this.task_name}}
-                        </p>
-                        <a class="delete-task-button" href=""><i class="fas fa-trash-alt"></i></a>
+                        <div class="text-task">
+                            {{#if this.completed}}
+                            <form action="/taskUncompleted" method="POST">
+                                <input type="hidden" name="id_list" id="id_list" value="{{../this._id}}">
+                                <input type="hidden" name="id_task" id="id_task" value="{{this._id}}">
+                                <button class="completed-task-button" type="submit"><i class="fas fa-check-square"></i></button>
+                            </form>
+                            {{else}}
+                            <form action="/taskCompleted" method="POST">
+                                <input type="hidden" name="id_list" id="id_list" value="{{../this._id}}">
+                                <input type="hidden" name="id_task" id="id_task" value="{{this._id}}">
+                                <button class="uncompleted-task-button" type="submit"><i class="far fa-square"></i></button>
+                            </form>
+                            {{/if}}
+                            {{this.task_name}}
+                        </div>
+                        <form action="/removeTask" method="POST">
+                            <input type="hidden" name="id_list" id="id_list" value="{{../this._id}}">
+                            <input type="hidden" name="id_task" id="id_task" value="{{this._id}}">
+                            <button class="delete-task-button" type="submit"><i class="fas fa-trash-alt"></i></button>
+                        </form>
                     </li>
                     {{/each}}
                 </ul>

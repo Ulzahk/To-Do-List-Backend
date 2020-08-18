@@ -109,11 +109,10 @@ listsController.addTask = async (req, res, next) => {
 }
 listsController.removeTask = async (req, res, next) => {
   try {
-    const task = await Tasks.findById(req.body.id_task)
-    await Lists.findByIdAndUpdate(
-      req.body.id_list,
-      {$pull: {tasks: task } },
-      { omitUndefined: true, new: true}
+    await Lists.update(
+      {_id: req.body.id_list},
+      {$pull: { tasks: {_id: req.body.id_task}}},
+      {safe: true}
     )
     await Tasks.findByIdAndDelete(req.body.id_task)
     res.redirect('/home')
@@ -122,5 +121,45 @@ listsController.removeTask = async (req, res, next) => {
   }
 }
 
+listsController.markTask = async (req, res, next) => {
+  try {
+    const task = {
+      completed: true
+    }
+    await Tasks.findByIdAndUpdate(
+      req.body.id_task,
+      {$set: task},
+      {omitUndefined: true, new: true}
+    )
+    const list = await Lists.update(
+      {'_id': `${req.body.id_list}`, 'tasks._id': `${req.body.id_task}`},
+      {'$set': {'tasks.$.completed': true}}
+    )
+    res.redirect('/home')
+  } catch (error) {
+    next(error)
+  }
+}
+
+
+listsController.unmarkTask = async (req, res, next) => {
+  try {
+    const task = {
+      completed: false
+    }
+    await Tasks.findByIdAndUpdate(
+      req.body.id_task,
+      {$set: task},
+      {omitUndefined: true, new: true}
+    )
+    const list = await Lists.update(
+      {'_id': `${req.body.id_list}`, 'tasks._id': `${req.body.id_task}`},
+      {'$set': {'tasks.$.completed': false}}
+    )
+    res.redirect('/home')
+  } catch (error) {
+    next(error)
+  }
+}
 
 module.exports = listsController

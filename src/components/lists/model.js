@@ -4,7 +4,12 @@ const { Schema } = mongoose
 const Lists = new Schema({
   list_title: { type: String, required: true },
   description: { type: String, required: true },
-  tasks: { type: Array, required: false },
+  tasks: [{
+    _id: String,
+    task_name: String,
+    completed: Boolean
+  }
+  ],
   tags: { type: Array, required: false }
 })
 

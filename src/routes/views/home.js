@@ -6,7 +6,6 @@ const Lists = require('../../components/lists/model')
 router.get('/', async (req, res, next) => {
     try {
       let list = await Lists.find().lean()
-      console.log(list)
       res.render('home', { layout: 'index', list: list})
     } catch (error) {
       next(error)

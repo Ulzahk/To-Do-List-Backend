@@ -175,19 +175,46 @@ body {
 }
 
 .main-section .card .card-body .ul-card-body li .text-task{
+    display: flex;
     margin: 0;
 }
 
+.main-section .card .card-body .ul-card-body li .completed-task-button{
+    text-decoration: none;
+    color: rgb(10, 185, 10);
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    cursor: pointer;
+    outline: none;
+    font-size: 16px;
+}
+
+.main-section .card .card-body .ul-card-body li .uncompleted-task-button{
+    text-decoration: none;
+    color: black;
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    cursor: pointer;
+    outline: none;
+    font-size: 16px;
+}
+
 .main-section .card .card-body .ul-card-body li .delete-task-button{
-    justify-content: flex-end;
     margin-right: 5px;
+    background-color: rgba(0, 0, 0, 0);
+    color: rgb(211, 17, 17);
+    border: none;
+    cursor: pointer;
     display: none;
+    outline: none;
+    font-size: 16px;
 }
 
 .main-section .card .card-body .ul-card-body li:hover .delete-task-button{
     justify-self: flex-end;
     transition: 0.3s;
-    display: block
+    display: block;
+    background-color: rgba(0, 0, 0, 0);
 }
 
 .main-section .card .card-footer{
