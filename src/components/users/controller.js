@@ -40,7 +40,6 @@ usersController.createUser = async (req, res, next) => {
       password: req.body.password = bcrypt.hashSync(req.body.password, 10)
     })
     await user.save()
-    console.log(user)
     res.redirect('/login')
     /* res.json({
       state: 201,
