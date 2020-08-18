@@ -61,7 +61,6 @@ body {
 .home-section{
     min-height: 99.7vh;
     font-family: 'Roboto', sans-serif;
-    border: 1px solid red
 }
 
 .home-section .header-section{
@@ -81,6 +80,11 @@ body {
     padding-left: 50px;
     font-weight: bold;
     font-size: 24px;
+}
+.home-section .header-section nav .logo-division .logo-text {
+    text-decoration: none;
+    margin: 24px 0;
+    color: black;
 }
 
 .home-section .header-section nav .navbar-division{
@@ -137,7 +141,8 @@ body {
     background-color: white;
     border: 1px solid #a2a9b186;
     border-radius: 5px;
-    padding: 10px
+    padding: 10px;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,1);
 }
 
 .main-section .card .card-header{
@@ -191,31 +196,36 @@ body {
     align-items: center;
 }
 
-.main-section .card .card-footer .add-task-button{
+.main-section .card .card-footer form .add-task-button{
     text-decoration: none;
     border: 1px solid rgb(10, 185, 10);
     border-radius: 5px;
     padding: 5px 10px;
     margin-right: 10px;
     color: rgb(10, 185, 10);
-    transition: 0.3s
+    transition: 0.3s;
+    font-size: 16.5px;
+    cursor: pointer;
 }
 
-.main-section .card .card-footer .add-task-button:hover{
+.main-section .card .card-footer form .add-task-button:hover{
     background-color: rgb(10, 185, 10);
     color: white;
 }
 
-.main-section .card .card-footer .delete-list-button{
+.main-section .card .card-footer form .delete-list-button{
     text-decoration: none;
     border: 1px solid rgb(211, 17, 17);
     border-radius: 5px;
     padding: 5px 10px;
     color: rgb(211, 17, 17);
-    transition: 0.3s
+    background-color: white;
+    transition: 0.3s;
+    font-size: 16.5px;
+    cursor: pointer;
 }
 
-.main-section .card .card-footer .delete-list-button:hover{
+.main-section .card .card-footer form .delete-list-button:hover{
     background-color: rgb(211, 17, 17);
     color: white;
 }

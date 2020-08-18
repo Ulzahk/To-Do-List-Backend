@@ -1,0 +1,13 @@
+<section class="form-section">
+    <form class="form" action="/authAddTask" method="POST">
+        <h2>Create New Task</h2>
+        <label for="list_title">
+            <p>Task Title</p>
+            <input class="input-data" type="text" name="task_name" id="task_name" placeholder="Write the list title here" required>
+            <input type="hidden" name="id_list" id="id_list" value="{{id_list}}">
+        </label>
+        <label>
+            <input class="input-submit"type="submit" value="Create">
+        </label>
+    </form>
+</section>

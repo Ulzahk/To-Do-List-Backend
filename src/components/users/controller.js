@@ -107,8 +107,9 @@ usersController.loginUser = async (req, res, next) => {
           error: 'Error, email or password not found'
         })
       } else {
-        createToken(user)
-        res.redirect('/home')
+        res
+          .set('user_token',createToken(user))
+          .redirect('/home')
         /* res.json({
           state: 200,
           done: 'Login correct',
@@ -156,6 +157,19 @@ usersController.addList = async (req, res, next) => {
   }
 }
 
+usersController.addOneList = async (req, res, next) =>{
+  try {
+    const list = new Lists({
+      list_title: req.body.list_title,
+      description: req.body.description
+    })
+    await list.save()
+    res.redirect('/home')
+  } catch (error) {
+    next(error)
+  }
+}
+
 usersController.removeList = async (req, res, next) => {
   try {
     // Search List
@@ -165,12 +179,10 @@ usersController.removeList = async (req, res, next) => {
       req.params.id,
       { $pull: { lists: list } },
       { omitUndefined: true, new: true })
-    console.log(req.body.id_list)
     // Delete List
     await Lists.findByIdAndDelete(req.body.id_list)
     // Get data from User
     const user = await Users.findById(req.params.id)
-
     res.json({
       state: 200,
       message: 'A list was remove from User',

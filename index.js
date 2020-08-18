@@ -11,6 +11,8 @@ const handlebars = require('express-handlebars')
 const loginRouter = require('./src/routes/views/login')
 const registerRouter = require('./src/routes/views/register')
 const homeRouter = require('./src/routes/views/home')
+const listRouter = require('./src/routes/views/createlist')
+const taskRouter = require('./src/routes/views/addtask')
 const { logErrors, wrapErrors, errorHandler } = require('./src/utils/middleware/errorHandlers')
 
 const app = express()
@@ -34,12 +36,6 @@ app.engine('handlebars', handlebars({
   toDoListApi(app)
   app.use('/lists', listsRouter)
   */
-app.use('/login', loginRouter)
-app.use('/register', registerRouter)
-app.use('/home', homeRouter)
-app.use('/', require('./src/components/users/routes'))
-app.use('/', require('./src/components/tasks/routes'))
-app.use('/', require('./src/components/lists/routes'))
 
 // Connection static files
 app.use(express.static('public'))
@@ -48,6 +44,18 @@ app.use(express.static('public'))
 app.get('/', function (req, res) {
   res.redirect('/login')
 })
+
+// Routes
+app.use('/login', loginRouter)
+app.use('/register', registerRouter)
+app.use('/home', homeRouter)
+app.use('/createList', listRouter)
+app.use('/addTask', taskRouter)
+app.use('/', require('./src/components/users/routes'))
+app.use('/', require('./src/components/tasks/routes'))
+app.use('/', require('./src/components/lists/routes'))
+
+
 
 // Errors middleware
 app.use(logErrors)

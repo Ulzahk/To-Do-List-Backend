@@ -31,8 +31,7 @@ tasksController.createTask = async (req, res, next) => {
   try {
     const task = new Tasks({
       taskname: req.body.taskname,
-      description: req.body.description,
-      completed: req.body.completed
+      completed: false,
     })
     await task.save()
     res.json({
@@ -49,7 +48,6 @@ tasksController.updateTask = async (req, res, next) => {
   try {
     const task = {
       taskname: req.body.taskname,
-      description: req.body.description,
       completed: req.body.completed
     }
     await Tasks.findByIdAndUpdate(req.params.id, { $set: task }, { omitUndefined: true, new: true })

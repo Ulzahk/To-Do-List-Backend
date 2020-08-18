@@ -1,15 +1,18 @@
+
 <section class="home-section">
     <header class="header-section">
         <nav>
             <div class="logo-division">
-                <p>To Do List App</p>
+                <a class="logo-text" href="/login">To Do List App</a>
             </div>
             <div class="navbar-division">
+                {{#each user}}
                 <li>
-                    <p>Welcome Back User</p>
+                    <p>Welcome Back {{this.username}}</p>
                 </li>
+                {{/each}}
                 <li>
-                    <a href=""> <i class="fas fa-plus-square"></i> Create List </a>
+                    <a href="/createList"> <i class="fas fa-plus-square"></i> Create List </a>
                 </li>
             </div>
         </nav>
@@ -18,29 +21,37 @@
         <h2>Lists</h2>
     </div>
     <main class="main-section">
+        {{#each list}}
         <div class="card">
             <div class="card-header">
-                <p class="card-header-title">Rutina de Ejercicios</p>
-                <p class="card-header-description">Conjunto de ejercicios para estar en buena condición fisica</p>
+                <p class="card-header-title">{{this.list_title}}</p>
+                <p class="card-header-description">{{this.description}}</p>
             </div>
             <div class="card-body">
                 <ul class="ul-card-body">
+                    {{#each this.tasks}}
                     <li>
                         <p class="text-task">
                             <a class="completed-task-button" href=""><i class="far fa-square"></i></a>
-                            10 Abdominales
+                                {{this.task_name}}
                         </p>
                         <a class="delete-task-button" href=""><i class="fas fa-trash-alt"></i></a>
                     </li>
-                    <li>Correr durante 10 minutos</li>
-                    <li>20 Sentadillas</li>
+                    {{/each}}
                 </ul>
             </div>
             <div class="card-footer">
-                <a class="add-task-button" href=""> <i class="fas fa-tasks"></i> Add Task</a>
-                <a class="delete-list-button" href=""> <i class="fas fa-trash-alt"></i> Delete List</a>
+                <form action="/addTask" method="GET">
+                    <input type="hidden" name="id_list" id="id_list" value="{{this._id}}">
+                    <button class="add-task-button" type="submit"><i class="fas fa-tasks"></i> Add Task </button>
+                </form>
+                <form action="/deleteList" method="POST">
+                    <input type="hidden" name="_id" id="_id" value="{{this._id}}">
+                    <button class="delete-list-button" type="submit"><i class="fas fa-trash-alt"></i> Delete List </button>
+                </form>
             </div>
         </div>
+        {{/each}}
     </main>
     <footer class="footer">
     </footer>

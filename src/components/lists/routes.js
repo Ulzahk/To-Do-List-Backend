@@ -8,4 +8,10 @@ router.post('/api/lists', lists.createList)
 router.patch('/api/lists/:id', lists.updateList)
 router.delete('/api/lists/:id', lists.deleteList)
 
+// Lists Home
+router.post('/deleteList', lists.deleteListButton)
+router.post('/authAddTask', lists.addTask)
+router.post('/removeTask',lists.removeTask)
+
+
 module.exports = router

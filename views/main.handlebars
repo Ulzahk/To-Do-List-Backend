@@ -3,6 +3,8 @@
 {{> hatedChamps}}
 {{#if listExists}} 
   <ul>
+    {{#each suggestedChamps}}
       <li class={{suggestedChamps.username}}>{{suggestedChamps.createdAt}}</li>
+    {{/each}}
   </ul>
 {{/if}}
