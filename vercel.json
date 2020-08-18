@@ -7,6 +7,7 @@
         "DB_USER": "@todolist-db-user",
         "DB_PASSWORD": "@todolist-db-password",
         "DB_HOST": "@todolist-db-host",
-        "DB_NAME": "@todolist-db-name"
+        "DB_NAME": "@todolist-db-name",
+        "TOKEN_KEY": "@todolist-token-key"
     }
 }
